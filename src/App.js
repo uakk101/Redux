@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useSelector,useDispatch} from 'react-redux';
+import {addItem , deleteItem} from './actions/cartAction'
+
+
 
 function App() {
+
+  const state = useSelector((state) => state);
+
+ console.log(state);
+
+  const dispatch = useDispatch();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Number of items in Cart: {state.numOfItems}</h2>
+      <button
+        onClick={() => {
+          dispatch(addItem());
+        }}
+      className="green">Add Item to Cart</button>
+      <button
+              onClick={() => {
+                dispatch(deleteItem());
+              }}
+      className="red">Remove Item from Cart</button>
     </div>
   );
 }
